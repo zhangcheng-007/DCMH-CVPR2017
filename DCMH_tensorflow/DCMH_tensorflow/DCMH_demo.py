@@ -12,11 +12,11 @@ from datetime import datetime, timedelta
 import time
 
 # environmental setting: setting the following parameters based on your experimental environment.
-select_gpu = '4'
+select_gpu = '0'
 per_process_gpu_memory_fraction = 0.9
 
 # data parameters
-DATA_DIR = 'data/FLICKR-25K.mat'
+DATA_DIR = '/content/mirflick25k.mat'
 TRAINING_SIZE = 10000
 QUERY_SIZE = 2000
 DATABASE_SIZE = 18015
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 	ydim = tags.shape[1]
 
 	X, Y, L = split_data(images, tags, labels)
-	print '...loading and splitting data finish'
+	print ('...loading and splitting data finish')
 	gpuconfig = tf.ConfigProto(gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=per_process_gpu_memory_fraction))
 	os.environ["CUDA_VISIBLE_DEVICES"] = select_gpu
 	batch_size = 128
@@ -224,7 +224,7 @@ if __name__ == '__main__':
 		train_step_y = optimizer.apply_gradients(gradient_y)
 		sess.run(tf.global_variables_initializer())
 		loss_ = calc_loss(var['B'], var['F'], var['G'], Sim, gamma, eta)
-		print '...epoch: %3d, loss: %3.3f' % (0, loss_)
+		print ('...epoch: %3d, loss: %3.3f' % (0, loss_))
 		result = {}
 		result['loss'] = []
 		result['imapi2t'] = []
@@ -245,10 +245,10 @@ if __name__ == '__main__':
 
 			# calculate loss
 			loss_ = calc_loss(var['B'], var['F'], var['G'], Sim, gamma, eta)
-			print '...epoch: %3d, loss: %3.3f, comment: update B' % (epoch + 1, loss_)
+			print ('...epoch: %3d, loss: %3.3f, comment: update B' % (epoch + 1, loss_))
 
 			result['loss'].append(loss_)
-		print '...training procedure finish'
+		print('...training procedure finish')
 		qBX = generate_image_code(image_input, cur_f_batch, query_x, bit, _meanpix)
 		qBY = generate_text_code(text_input, cur_g_batch, query_y, bit)
 		rBX = generate_image_code(image_input, cur_f_batch, retrieval_x, bit, _meanpix)
@@ -256,7 +256,7 @@ if __name__ == '__main__':
 
 		mapi2t = calc_map(qBX, rBY, query_L, retrieval_L)
 		mapt2i = calc_map(qBY, rBX, query_L, retrieval_L)
-		print '...test map: map(i->t): %3.3f, map(t->i): %3.3f' % (mapi2t, mapt2i)
+		print ('...test map: map(i->t): %3.3f, map(t->i): %3.3f' % (mapi2t, mapt2i))
 
 		result['mapi2t'] = mapi2t
 		result['mapt2i'] = mapt2i
