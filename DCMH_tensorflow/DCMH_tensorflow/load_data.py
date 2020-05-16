@@ -11,8 +11,8 @@ def loading_data(path):
 	return images, tags, labels
 
 if __name__=='__main__':
-	path = 'data/FLICKR-25K.mat'
+	path = ('/content/mirflickr25k.mat')
 	images, tags, labels = loading_data(path)
-	print images.shape
-	print tags.shape
-	print labels.shape
+	print (images.shape)
+	print (tags.shape)
+	print (labels.shape)
