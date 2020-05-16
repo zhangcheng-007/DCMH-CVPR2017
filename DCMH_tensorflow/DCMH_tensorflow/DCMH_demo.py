@@ -35,7 +35,7 @@ def train_img_net(image_input, cur_f_batch, var, ph, train_x, train_L, lr, train
 	batch_size = var['batch_size']
 	num_train = train_x.shape[0]
 	# index = range(0, num_train - 1, 1)
-	for iter in range(num_train / batch_size):
+	for iter in range(int(num_train / batch_size)):
 		index = np.random.permutation(num_train)
 		ind = index[0: batch_size]
 		# ind = index[iter * batch_size: (iter + 1) * batch_size]
@@ -58,7 +58,7 @@ def train_txt_net(text_input, cur_g_batch, var, ph, train_y, train_L, lr, train_
 	G = var['G']
 	batch_size = var['batch_size']
 	num_train = train_x.shape[0]
-	for iter in range(num_train / batch_size):
+	for iter in range (int(num_train / batch_size)):
 		index = np.random.permutation(num_train)
 		ind = index[0: batch_size]
 		unupdated_ind = np.setdiff1d(range(num_train), ind)
@@ -111,7 +111,7 @@ def generate_image_code(image_input, cur_f_batch, X, bit, mean_pixel):
 	num_data = X.shape[0]
 	index = np.linspace(0, num_data - 1, num_data).astype(int)
 	B = np.zeros([num_data, bit], dtype=np.float32)
-	for iter in xrange(num_data / batch_size + 1):
+	for iter in range (int(num_data / batch_size + 1)):
 		ind = index[iter * batch_size : min((iter + 1)*batch_size, num_data)]
 		mean_pixel_ = np.repeat(mean_pixel[:, :, :, np.newaxis], len(ind), axis=3)
 		image = X[ind, :, :, :].astype(np.float32) - mean_pixel_.astype(np.float32).transpose(3, 0, 1, 2)
@@ -127,7 +127,7 @@ def generate_text_code(text_input, cur_g_batch, Y, bit):
 	num_data = Y.shape[0]
 	index = np.linspace(0, num_data - 1, num_data).astype(int)
 	B = np.zeros([num_data, bit], dtype=np.float32)
-	for iter in xrange(num_data / batch_size + 1):
+	for iter in range (int(num_data / batch_size + 1)):
 		ind = index[iter * batch_size : min((iter + 1)*batch_size, num_data)]
 		text = Y[ind, :].astype(np.float32)
 		text = text.reshape([text.shape[0],1,text.shape[1],1])
