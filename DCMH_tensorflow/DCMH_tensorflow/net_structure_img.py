@@ -3,7 +3,7 @@ import scipy.misc
 import numpy as np
 import scipy.io
 
-MODEL_DIR = './data/imagenet-vgg-f.mat'
+MODEL_DIR = '/content/imagenet-vgg-f.mat'
 def img_net_strucuture(input_image, bit):
 	data = scipy.io.loadmat(MODEL_DIR)
 	layers = (
