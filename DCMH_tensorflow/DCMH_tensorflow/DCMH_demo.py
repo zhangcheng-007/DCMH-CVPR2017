@@ -16,7 +16,7 @@ select_gpu = '0'
 per_process_gpu_memory_fraction = 0.9
 
 # data parameters
-DATA_DIR = '/content/mirflick25k.mat'
+DATA_DIR = '/content/mirflickr25k.mat'
 TRAINING_SIZE = 10000
 QUERY_SIZE = 2000
 DATABASE_SIZE = 18015
