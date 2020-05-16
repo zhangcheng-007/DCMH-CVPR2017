@@ -51,4 +51,4 @@ if __name__=='__main__':
 													[0, 0, 1, 0]])
 
 	map = calc_map(qB, rB, query_L, retrieval_L)
-	print map
+	print (map)
