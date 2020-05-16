@@ -35,7 +35,7 @@ def train_img_net(image_input, cur_f_batch, var, ph, train_x, train_L, lr, train
 	batch_size = var['batch_size']
 	num_train = train_x.shape[0]
 	# index = range(0, num_train - 1, 1)
-	for iter in xrange(num_train / batch_size):
+	for iter in range(num_train / batch_size):
 		index = np.random.permutation(num_train)
 		ind = index[0: batch_size]
 		# ind = index[iter * batch_size: (iter + 1) * batch_size]
@@ -58,7 +58,7 @@ def train_txt_net(text_input, cur_g_batch, var, ph, train_y, train_L, lr, train_
 	G = var['G']
 	batch_size = var['batch_size']
 	num_train = train_x.shape[0]
-	for iter in xrange(num_train / batch_size):
+	for iter in range(num_train / batch_size):
 		index = np.random.permutation(num_train)
 		ind = index[0: batch_size]
 		unupdated_ind = np.setdiff1d(range(num_train), ind)
