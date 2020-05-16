@@ -3,7 +3,7 @@ import numpy as np
 
 def loading_data(path):
 	file = h5py.File(path)
-	images = file['images'][:].transpose(0,3,2,1)
+	images = file['IAll'][:].transpose(0,3,2,1)
 	labels = file['LAll'][:].transpose(1,0)
 	tags = file['YAll'][:].transpose(1,0)
 
