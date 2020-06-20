@@ -12,7 +12,7 @@ def calc_map(qB, rB, query_L, retrieval_L):
 	# retrieval_L: {0,1}^{nxl}
 	num_query = query_L.shape[0]
 	map = 0
-	for iter in xrange(num_query):
+	for iter in range(num_query):
 		gnd = (np.dot(query_L[iter, :], retrieval_L.transpose()) > 0).astype(np.float32)
 		tsum = np.sum(gnd)
 		if tsum == 0:
@@ -20,6 +20,7 @@ def calc_map(qB, rB, query_L, retrieval_L):
 		hamm = calc_hammingDist(qB[iter, :], rB)
 		ind = np.argsort(hamm)
 		gnd = gnd[ind]
+		tsum = int(tsum)
 		count = np.linspace(1, tsum, tsum)
 
 		tindex = np.asarray(np.where(gnd == 1)) + 1.0
